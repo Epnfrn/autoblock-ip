@@ -23,10 +23,10 @@ const url = "https://api.abuseipdb.com/api/v2/check";
 
 // Funciones helper
 
-// Sacada de IA. Ejecutar comando sudo psad -S | grep -oP '^SRC:\s+\K[\d\.]+' > /opt/autoblock-ip/psad-ip-list.txt
+// Sacada de IA. Ejecutar comando psad -S | grep -oP '^SRC:\s+\K[\d\.]+' > /opt/autoblock-ip/psad-ip-list.txt
 //   y almacenar su output en archivo de texto psad-ip-list.txt
 async function usePSADAndOverwriteTextFile() {
-    const command = `sudo psad -S | grep -oP '^SRC:\\s+\\K[\\d\\.]+' > ${PSAD_OUTPUT_PATH}`;
+    const command = `psad -S | grep -oP '^SRC:\\s+\\K[\\d\\.]+' > ${PSAD_OUTPUT_PATH}`;
     
     try {
         await new Promise((resolve, reject) => {
@@ -70,8 +70,8 @@ async function loadIPSet(filename) {
 // Sacada de IA. Bloquea IP (con ufw)
 async function blockIP(ip) {
     try {
-        // Ejecuta comando sudo ufw deny from <SUSPICIOUS_IP>
-        execSync(`sudo ufw deny from ${ip}`);
+        // Ejecuta comando ufw deny from <SUSPICIOUS_IP>
+        execSync(`ufw deny from ${ip}`);
         await log(`Blocked IP ${ip}`, "ÉXITO");
     } 
     catch (error) {
@@ -150,7 +150,7 @@ async function isSuspiciousIP(ip) {
 
 async function main() {
 
-    // Ejecutar comando sudo psad -S | grep -oP '^SRC:\s+\K[\d\.]+' > /opt/autoblock-ip/psad-ip-list.txt
+    // Ejecutar comando psad -S | grep -oP '^SRC:\s+\K[\d\.]+' > /opt/autoblock-ip/psad-ip-list.txt
     //   y almacenar su output en archivo de texto psad-ip-list.txt
     await usePSADAndOverwriteTextFile();
 
