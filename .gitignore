@@ -1,0 +1,8 @@
+# Ignorar archivos específicos
+.env
+
+# Ignorar carpetas
+#   NOTA: logs/* Ignora contenido pero mantiene carpeta, !logs/.gitkeep  # Excepción para trackear carpeta con placeholder .gitkeep
+node_modules/
+logs/*     
+!logs/.gitkeep 

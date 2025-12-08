@@ -1,0 +1,30 @@
+{
+  "name": "autoblock-ip",
+  "version": "0.1.0",
+  "description": "Programa en JS que automatiza bloqueo de IP en VPS (Debian).",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Epnfrn/autoblock-ip.git"
+  },
+  "keywords": [
+    "IP",
+    "block",
+    "automation",
+    "psad",
+    "abusedb",
+    "ufw"
+  ],
+  "author": "Leonardo C. A.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Epnfrn/autoblock-ip/issues"
+  },
+  "homepage": "https://github.com/Epnfrn/autoblock-ip#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}
