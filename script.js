@@ -200,7 +200,7 @@ async function main() {
 //   además mostrar en consola
 async function log(message, level = 'INFO') {
     
-    const entry = `[${new Date().toISOString()}] [${level}] ${message}\n`;
+    const entry = `[${new Date().toISOString().slice(0, 16)}] [${level}] ${message}\n`;       // Formato de timestamp "2025-12-08T04:33"
     
     fs.appendFile(LOG_FILE, entry);
     

@@ -7,5 +7,4 @@ Nociones generales:
 
 
 PENDIENTE: Detallar requisitos (instalar PSAD, configurar PSAD y ufw, crear cuenta en AbuseDB
-y crear clave API, ejecutar script recurrentemente con cron, etc.) y riesgos (bloqueo de IP
-propia si se realiza escaneo de puertos).
+y crear clave API, ejecutar script recurrentemente con cron, crear archivo .env) y riesgos (bloqueo de IP propia si se realiza escaneo de puertos).
