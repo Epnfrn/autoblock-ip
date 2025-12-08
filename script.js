@@ -10,7 +10,7 @@ require('dotenv').config();
 const WHITELIST_FILE = path.join(__dirname, 'whitelist.txt');
 const BLACKLIST_FILE = path.join(__dirname, 'blacklist.txt');
 const TEMP_IGNORE_LIST_FILE = path.join(__dirname, 'temp-ignore-list.txt');
-// El archivo de salida real del comando psad debe ser el especificado.
+// El archivo de salida real del comando /usr/sbin/psad debe ser el especificado.
 const PSAD_OUTPUT_PATH = path.join(__dirname, "psad-ip-list.txt");
 
 const timestamp = new Date().toISOString().replace(/:/g, '-').replace(/T/, '_').split('.')[0];   // Ej. "2025-12-08T03-26-57"
@@ -23,10 +23,10 @@ const url = "https://api.abuseipdb.com/api/v2/check";
 
 // Funciones helper
 
-// Sacada de IA. Ejecutar comando psad -S | grep -oP '^SRC:\s+\K[\d\.]+' > /opt/autoblock-ip/psad-ip-list.txt
+// Sacada de IA. Ejecutar comando /usr/sbin/psad -S | grep -oP '^SRC:\s+\K[\d\.]+' > /opt/autoblock-ip/psad-ip-list.txt
 //   y almacenar su output en archivo de texto psad-ip-list.txt
 async function usePSADAndOverwriteTextFile() {
-    const command = `psad -S | grep -oP '^SRC:\\s+\\K[\\d\\.]+' > ${PSAD_OUTPUT_PATH}`;
+    const command = `/usr/sbin/psad -S | grep -oP '^SRC:\\s+\\K[\\d\\.]+' > ${PSAD_OUTPUT_PATH}`;    // se usa la dirección absoluta del comando para prevenir errores en el cronjob (que webea con las direcciones relativas)
     
     try {
         await new Promise((resolve, reject) => {
@@ -150,12 +150,12 @@ async function isSuspiciousIP(ip) {
 
 async function main() {
 
-    // Ejecutar comando psad -S | grep -oP '^SRC:\s+\K[\d\.]+' > /opt/autoblock-ip/psad-ip-list.txt
+    // Ejecutar comando /usr/sbin/psad -S | grep -oP '^SRC:\s+\K[\d\.]+' > /opt/autoblock-ip/psad-ip-list.txt
     //   y almacenar su output en archivo de texto psad-ip-list.txt
     await usePSADAndOverwriteTextFile();
 
     // Crear sets basados en el contenido de los archivos de texto
-    // Se lee el archivo donde el comando psad guarda la lista.
+    // Se lee el archivo donde el comando /usr/sbin/psad guarda la lista.
     const psad_ip_list = await loadIPSet(PSAD_OUTPUT_PATH); 
     const whitelist = await loadIPSet(WHITELIST_FILE);
     const blacklist = await loadIPSet(BLACKLIST_FILE);
