@@ -3,7 +3,7 @@
 const { exec, execSync } = require('child_process');
 const fs = require('fs/promises'); // Para manejar I/O de archivos asíncrono
 const path = require('path');
-require('dotenv').config();
+require('dotenv').config({ path: "/opt/autoblock-ip/.env" });
 
 
 // Constantes globales
@@ -110,6 +110,12 @@ async function isSuspiciousIP(ip) {
         verbose: ''
     });
     const full_url = `${url}?${params.toString()}`;
+
+    // Chequeo de error (variable entorno NO definida)
+    if (typeof ABUSEDB_API_KEY === "undefined") {
+        await log("Variable de entorno NO definida.", "ERROR");
+        process.exit(1);
+    }
 
     // Encabezados necesarios
     const headers = {
