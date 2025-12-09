@@ -71,7 +71,7 @@ async function loadIPSet(filename) {
 async function blockIP(ip) {
     try {
         // Ejecuta comando ufw deny from <SUSPICIOUS_IP>
-        execSync(`ufw deny from ${ip}`);
+        execSync(`/usr/sbin/ufw deny from ${ip}`);
         await log(`Blocked IP ${ip}`, "ÉXITO");
     } 
     catch (error) {
