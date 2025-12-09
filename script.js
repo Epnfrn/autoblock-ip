@@ -3,7 +3,7 @@
 const { exec, execSync } = require('child_process');
 const fs = require('fs/promises'); // Para manejar I/O de archivos asíncrono
 const path = require('path');
-require('dotenv').config({ path: "/opt/autoblock-ip/.env" });
+require('dotenv').config({ path: path.join(__dirname, ".env") });
 
 
 // Constantes globales
